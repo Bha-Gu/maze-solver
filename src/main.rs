@@ -77,7 +77,8 @@ enum Dir {
 }
 
 fn display(maze: &Vec<Vec<char>>, path: &Vec<Point>){
-    let mut display = maze.clone();
+    let mut display = maze.to_owned();
+    let path = path.to_owned();
     for pair in path.windows(2) {
         let (p1, p2) = (pair[0], pair[1]); 
         let (x1, x2, y1, y2) = (p1.x, p2.x, p1.y, p2.y);
@@ -122,6 +123,6 @@ fn main() {
         x: 5,
         y: 0
      };
-     let path = solve(&maze, wall, start, end);
+     let _path = solve(&maze, wall, start, end);
      
 }
