@@ -44,10 +44,12 @@ fn walk(
         }
         let nx = match (cx, x) {
             (cx, x) if x < 0 => cx - 1, //when x i -ive
+            #[allow(clippy::cast_sign_loss)]
             (cx, x) => cx + x as usize, //otherwise
         };
         let ny = match (cy, y) {
             (cy, y) if y < 0 => cy - 1, //when x i -ive
+            #[allow(clippy::cast_sign_loss)]
             (cy, y) => cy + y as usize, //otherwise
         };
         let curr = Point { x: nx, y: ny };
@@ -78,7 +80,7 @@ enum Dir {
     Right,
 }
 
-fn display(maze: &Vec<Vec<char>>, path: &Vec<Point>) {
+fn display(maze: &[Vec<char>], path: &[Point]) {
     let mut display = maze.to_owned();
     let path = path.to_owned();
     for pair in path.windows(2) {
@@ -104,7 +106,7 @@ fn display(maze: &Vec<Vec<char>>, path: &Vec<Point>) {
     for i in display {
         // println!("{:?}", i);
         for j in i {
-            print!("{} ", j);
+            print!("{j} ");
         }
         println!();
     }
